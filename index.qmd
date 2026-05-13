@@ -1,11 +1,21 @@
 ---
-title: "temp_website"
+title: "Hi, I'm Hadi 👋"
 ---
 
-This is a Quarto website.
+Welcome to my personal website! I'm a data engineering professional based in Singapore, passionate about building automated pipelines and making sense of complex datasets.
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+## About Me
 
-```{r}
-1 + 1
-```
+I work in a facility environment where I design and maintain automated reporting systems — turning raw sensor data into actionable insights. My toolkit includes Python, Jupyter notebooks, and various data processing libraries.
+
+![ ](imgs/profile.png){width=60%}
+
+## What I Do
+
+- 🔧 **Data Engineering** — Building robust ETL pipelines for equipment monitoring systems  
+- 📊 **Reporting Automation** — Generating Excel workbooks and PDF reports from raw sensor logs  
+- 🐍 **Python Development** — Scripting, Jupyter notebooks, and batch processing tools  
+
+## A Quick Intro Video
+
+{{< video https://www.youtube.com/watch?v=rphrFDf00mk width="600" height="400" >}}

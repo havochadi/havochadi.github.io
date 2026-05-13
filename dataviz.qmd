@@ -1,0 +1,35 @@
+---
+title: "Data Visualisation"
+---
+
+## Temperature Monitoring Dashboard
+
+This visualisation was created as part of my automated facility reporting pipeline. It shows the temperature trends across ultra-low temperature freezer units over a monthly period.
+
+### What It Shows
+
+Each freezer unit (e.g. S13, S15) is logged continuously by a Dickson temperature logger. The dot plot below represents hourly average temperatures across the month, colour-coded by severity:
+
+| Colour | Temperature Range | Meaning |
+|--------|-------------------|---------|
+| 🔵 Deep Blue | Below −80 °C | Below target — check unit |
+| 🔵 Light Blue | −80 °C to −75 °C | Within acceptable range |
+| ⬜ White | −75 °C | At target setpoint |
+| 🔴 Red | Above −75 °C | Alarm threshold exceeded |
+
+### The Story Behind It
+
+Ultra-low freezers store biological samples at around −80 °C. Any sustained deviation above −75 °C risks sample integrity. This visualisation makes it immediately obvious whether a unit had any temperature excursions during the month — without needing to scan through hundreds of raw readings.
+
+### How It Was Built
+
+The chart is generated programmatically using `openpyxl` — specifically a 31-series connected scatter chart (one series per day), with exactly two data points per series (start and end of day) to produce a clean dot-plot aesthetic in both Excel and LibreOffice.
+
+![ ](imgs/profile.png){width=80%}
+
+*Figure: Monthly dot plot for freezer unit S13 — each dot represents an hourly average temperature.*
+
+### Key Insight
+
+> In a well-functioning month, all dots cluster tightly around −80 °C.  
+> Any scatter above −75 °C immediately flags a potential excursion event for investigation.

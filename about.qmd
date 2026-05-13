@@ -1,9 +1,37 @@
 ---
-title: "About"
+title: "FYP Project"
 ---
 
-About this site
+## Automated Freezer Equipment Reporting Pipeline
 
-```{r}
-1 + 1
-```
+This project automates the monthly reporting workflow for ultra-low temperature freezer units in a facility environment.
+
+### The Problem
+
+Each month, Dickson temperature loggers produce PDF reports for each freezer unit (e.g. S13, S15). Manually extracting and summarising this data was time-consuming and error-prone.
+
+### The Solution
+
+I built a Python-based batch processing pipeline in Jupyter notebooks that:
+
+1. **Reads** each Dickson PDF report automatically  
+2. **Extracts** all temperature readings using `pypdf`  
+3. **Computes** hourly averages and daily statistics  
+4. **Generates** structured Excel workbooks with three sheets:
+   - Readings — raw data with conditional formatting  
+   - Hourly Averages — colour-coded by temperature range  
+   - Dot Plot — a connected scatter chart (one data point per hour)  
+5. **Exports** PDF versions via LibreOffice  
+6. **Consolidates** all dot plots and hourly averages into combined PDFs  
+
+### Tech Stack
+
+- **Python** — `pypdf`, `openpyxl`, `pandas`  
+- **Jupyter Notebooks** — for interactive development and batch runs  
+- **LibreOffice** — headless PDF rendering  
+
+### Sample Output
+
+![ ](imgs/profile.png){width=80%}
+
+*Figure: Sample dot plot output for a single freezer unit over one month.*

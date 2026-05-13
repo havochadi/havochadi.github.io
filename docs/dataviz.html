@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>FYP Project – Hadi’s Website</title>
+<title>Data Visualisation – Hadi’s Website</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -102,11 +102,11 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./about.html" aria-current="page"> 
+    <a class="nav-link" href="./about.html"> 
 <span class="menu-text">FYP Project</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./dataviz.html"> 
+    <a class="nav-link active" href="./dataviz.html" aria-current="page"> 
 <span class="menu-text">Data Visualisation</span></a>
   </li>  
 </ul>
@@ -124,12 +124,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#automated-freezer-equipment-reporting-pipeline" id="toc-automated-freezer-equipment-reporting-pipeline" class="nav-link active" data-scroll-target="#automated-freezer-equipment-reporting-pipeline">Automated Freezer Equipment Reporting Pipeline</a>
+  <li><a href="#temperature-monitoring-dashboard" id="toc-temperature-monitoring-dashboard" class="nav-link active" data-scroll-target="#temperature-monitoring-dashboard">Temperature Monitoring Dashboard</a>
   <ul class="collapse">
-  <li><a href="#the-problem" id="toc-the-problem" class="nav-link" data-scroll-target="#the-problem">The Problem</a></li>
-  <li><a href="#the-solution" id="toc-the-solution" class="nav-link" data-scroll-target="#the-solution">The Solution</a></li>
-  <li><a href="#tech-stack" id="toc-tech-stack" class="nav-link" data-scroll-target="#tech-stack">Tech Stack</a></li>
-  <li><a href="#sample-output" id="toc-sample-output" class="nav-link" data-scroll-target="#sample-output">Sample Output</a></li>
+  <li><a href="#what-it-shows" id="toc-what-it-shows" class="nav-link" data-scroll-target="#what-it-shows">What It Shows</a></li>
+  <li><a href="#the-story-behind-it" id="toc-the-story-behind-it" class="nav-link" data-scroll-target="#the-story-behind-it">The Story Behind It</a></li>
+  <li><a href="#how-it-was-built" id="toc-how-it-was-built" class="nav-link" data-scroll-target="#how-it-was-built">How It Was Built</a></li>
+  <li><a href="#key-insight" id="toc-key-insight" class="nav-link" data-scroll-target="#key-insight">Key Insight</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -143,7 +143,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">FYP Project</h1>
+<h1 class="title">Data Visualisation</h1>
 </div>
 
 
@@ -160,51 +160,60 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="automated-freezer-equipment-reporting-pipeline" class="level2">
-<h2 class="anchored" data-anchor-id="automated-freezer-equipment-reporting-pipeline">Automated Freezer Equipment Reporting Pipeline</h2>
-<p>This project automates the monthly reporting workflow for ultra-low temperature freezer units in a facility environment.</p>
-<section id="the-problem" class="level3">
-<h3 class="anchored" data-anchor-id="the-problem">The Problem</h3>
-<p>Each month, Dickson temperature loggers produce PDF reports for each freezer unit (e.g.&nbsp;S13, S15). Manually extracting and summarising this data was time-consuming and error-prone.</p>
+<section id="temperature-monitoring-dashboard" class="level2">
+<h2 class="anchored" data-anchor-id="temperature-monitoring-dashboard">Temperature Monitoring Dashboard</h2>
+<p>This visualisation was created as part of my automated facility reporting pipeline. It shows the temperature trends across ultra-low temperature freezer units over a monthly period.</p>
+<section id="what-it-shows" class="level3">
+<h3 class="anchored" data-anchor-id="what-it-shows">What It Shows</h3>
+<p>Each freezer unit (e.g.&nbsp;S13, S15) is logged continuously by a Dickson temperature logger. The dot plot below represents hourly average temperatures across the month, colour-coded by severity:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Colour</th>
+<th>Temperature Range</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>🔵 Deep Blue</td>
+<td>Below −80 °C</td>
+<td>Below target — check unit</td>
+</tr>
+<tr class="even">
+<td>🔵 Light Blue</td>
+<td>−80 °C to −75 °C</td>
+<td>Within acceptable range</td>
+</tr>
+<tr class="odd">
+<td>⬜ White</td>
+<td>−75 °C</td>
+<td>At target setpoint</td>
+</tr>
+<tr class="even">
+<td>🔴 Red</td>
+<td>Above −75 °C</td>
+<td>Alarm threshold exceeded</td>
+</tr>
+</tbody>
+</table>
 </section>
-<section id="the-solution" class="level3">
-<h3 class="anchored" data-anchor-id="the-solution">The Solution</h3>
-<p>I built a Python-based batch processing pipeline in Jupyter notebooks that:</p>
-<ol type="1">
-<li><strong>Reads</strong> each Dickson PDF report automatically<br>
-</li>
-<li><strong>Extracts</strong> all temperature readings using <code>pypdf</code><br>
-</li>
-<li><strong>Computes</strong> hourly averages and daily statistics<br>
-</li>
-<li><strong>Generates</strong> structured Excel workbooks with three sheets:
-<ul>
-<li>Readings — raw data with conditional formatting<br>
-</li>
-<li>Hourly Averages — colour-coded by temperature range<br>
-</li>
-<li>Dot Plot — a connected scatter chart (one data point per hour)<br>
-</li>
-</ul></li>
-<li><strong>Exports</strong> PDF versions via LibreOffice<br>
-</li>
-<li><strong>Consolidates</strong> all dot plots and hourly averages into combined PDFs</li>
-</ol>
+<section id="the-story-behind-it" class="level3">
+<h3 class="anchored" data-anchor-id="the-story-behind-it">The Story Behind It</h3>
+<p>Ultra-low freezers store biological samples at around −80 °C. Any sustained deviation above −75 °C risks sample integrity. This visualisation makes it immediately obvious whether a unit had any temperature excursions during the month — without needing to scan through hundreds of raw readings.</p>
 </section>
-<section id="tech-stack" class="level3">
-<h3 class="anchored" data-anchor-id="tech-stack">Tech Stack</h3>
-<ul>
-<li><strong>Python</strong> — <code>pypdf</code>, <code>openpyxl</code>, <code>pandas</code><br>
-</li>
-<li><strong>Jupyter Notebooks</strong> — for interactive development and batch runs<br>
-</li>
-<li><strong>LibreOffice</strong> — headless PDF rendering</li>
-</ul>
-</section>
-<section id="sample-output" class="level3">
-<h3 class="anchored" data-anchor-id="sample-output">Sample Output</h3>
+<section id="how-it-was-built" class="level3">
+<h3 class="anchored" data-anchor-id="how-it-was-built">How It Was Built</h3>
+<p>The chart is generated programmatically using <code>openpyxl</code> — specifically a 31-series connected scatter chart (one series per day), with exactly two data points per series (start and end of day) to produce a clean dot-plot aesthetic in both Excel and LibreOffice.</p>
 <p><img src="imgs/profile.png" class="img-fluid" style="width:80.0%"></p>
-<p><em>Figure: Sample dot plot output for a single freezer unit over one month.</em></p>
+<p><em>Figure: Monthly dot plot for freezer unit S13 — each dot represents an hourly average temperature.</em></p>
+</section>
+<section id="key-insight" class="level3">
+<h3 class="anchored" data-anchor-id="key-insight">Key Insight</h3>
+<blockquote class="blockquote">
+<p>In a well-functioning month, all dots cluster tightly around −80 °C.<br>
+Any scatter above −75 °C immediately flags a potential excursion event for investigation.</p>
+</blockquote>
 
 
 </section>
